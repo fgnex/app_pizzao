@@ -18,18 +18,18 @@ steps:
     stage: test
     image: gradle:4.7.0-jdk8-alpine
     commands:
-      - gradle test --no-daemon --build-cache --gradle-user-home=/codefresh/volume/.gradle -Dmaven.repo.local=/codefresh/volume/m2
+      - gradle test --no-daemon --build-cache --gradle-home=/codefresh/volume/.gradle -Dmaven.repo.local=/codefresh/volume/m2
   BuildMyJar:
     title: Packaging Jar file
     stage: package
     image: gradle:4.7.0-jdk8-alpine
     commands:
-     - gradle build --no-daemon --build-cache --gradle-user-home=/codefresh/volume/.gradle -Dmaven.repo.local=/codefresh/volume/m2
+     - gradle build --no-daemon --build-cache --gradle-home=/codefresh/volume/.gradle -Dmaven.repo.local=/codefresh/volume/m2
   MyAppDockerImage:
     title: Building Docker Image
     type: build
     stage: build
-    image_name: gradle-sample-app
+    image_name: gradle-back-end-orig
     working_directory: ./
     tag: 'non-multi-stage'
     dockerfile: Dockerfile.only-package
